@@ -6,5 +6,23 @@
     <a routerLink="/main/autor">Autor</a>
     <a routerLink="/main/tema">Tema</a>
 </nav>
-
 <router-outlet></router-outlet>
+<app-bread-crum></app-bread-crum>
+<div>
+<label>Coger datos </label>
+<input type="text" [value]="pista" />
+<p>
+<br>
+<input [(ngModel)]="nuevoMensaje" placeholder="Nuevo Mensaje">
+<button (click)="setString()">Cambiar Mensaje</button>
+</p>
+</div>
+
+<div>
+    <label>{{contador}} </label>
+    <br><br>
+    <button (click)="incrementarContador()">incrementar Contador</button>
+    <button (click)="decrementarContador()">Decrementar Contador</button>
+    <br><br>
+    <input [(ngModel)]="contador" placeholder="Valor Contador">
+</div>
