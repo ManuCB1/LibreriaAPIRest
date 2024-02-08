@@ -1,28 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivationEnd, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { Subscription, filter, map } from 'rxjs';
 
 @Component({
   selector: 'app-bread-crum',
   templateUrl: './bread-crum.component.html',
   styleUrl: './bread-crum.component.css'
 })
-export class BreadCrumComponent implements OnInit{
+export class BreadCrumComponent implements OnInit, OnDestroy{
 
-  items: MenuItem[];
+  items: MenuItem[] = [];
+  home: any = {icon: 'pi pi-home', routerLink:"/"};
+  position: 'top' = 'top';
 
-  constructor() {
-    this.items = [
-      {label: 'Categories'},
-      {label: 'Sports'},
-      {label: 'Football'},
-      {label: 'Countries'},
-      {label: 'Spain'},
-      {label: 'F.C. Barcelona'}];
+  private titleSub$: Subscription;
+  
+  constructor(private router: Router) {
+      this.titleSub$ = this.getDataRouter().subscribe(({title}) => {
+        this.items = []
+        this.items.push({label: title});
+      });
    }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
+  ngOnDestroy(): void {
+    if (this.titleSub$) {
+      this.titleSub$.unsubscribe();
+    }
   }
 
-  home: any = {icon: 'pi pi-home', routerLink:"/main"};
+  getDataRouter(){
+    return this.router.events.pipe(
+      filter((event:any) => {
+      // console.log(event);
+      return event instanceof ActivationEnd}),
+      filter((event: ActivationEnd) => event.snapshot.firstChild === null),
+      map((event: ActivationEnd) => event.snapshot.data)
+    );
+  }
 }

@@ -10,6 +10,9 @@ import { BarraCierreComponent } from './barra-cierre/barra-cierre.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    BarraCierreComponent
   ]
 })
 export class ComponentsModule { }

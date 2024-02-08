@@ -1,14 +1,21 @@
-<p>main-page works!</p>
-
-<nav>
+<!-- <nav>
     <a routerLink="/main">Home</a>
     <a routerLink="/main/libro">Libro</a>
     <a routerLink="/main/autor">Autor</a>
     <a routerLink="/main/tema">Tema</a>
-</nav>
-<router-outlet></router-outlet>
-<app-bread-crum></app-bread-crum>
-<div>
+</nav> -->
+
+<app-barra-cierre></app-barra-cierre>
+<div class="dock-window">
+    <app-bread-crum></app-bread-crum>
+    <br>
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+    <app-barra-navegacion></app-barra-navegacion>
+</div>
+
+<!-- <div class="pruebasDiv">
 <label>Coger datos </label>
 <input type="text" [value]="pista" />
 <p>
@@ -18,11 +25,11 @@
 </p>
 </div>
 
-<div>
+<div class="pruebasDiv">
     <label>{{contador}} </label>
     <br><br>
     <button (click)="incrementarContador()">incrementar Contador</button>
     <button (click)="decrementarContador()">Decrementar Contador</button>
     <br><br>
     <input [(ngModel)]="contador" placeholder="Valor Contador">
-</div>
+</div> -->

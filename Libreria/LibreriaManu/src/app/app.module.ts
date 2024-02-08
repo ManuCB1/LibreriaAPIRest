@@ -1,10 +1,11 @@
 import { PagesModule } from './pages/pages.module';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,10 +15,20 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PagesModule
+    PagesModule,
+    HttpClientModule
   ],
   providers: [
-    provideClientHydration()
+    provideHttpClient(withFetch()),
+    provideClientHydration(),
+    // {
+    //   provide: APP_INITIALIZER,
+    //   multi: true,
+    //   useValue: () => {
+    //     console.log('Iniciando la app con INITIALIZER');
+    //   }
+    // }
+    
   ],
   bootstrap: [AppComponent]
 })

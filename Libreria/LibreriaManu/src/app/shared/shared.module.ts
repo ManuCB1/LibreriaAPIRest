@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { BarraNavegacionComponent } from './barra-navegacion/barra-navegacion.component';
 import { BreadCrumComponent } from './bread-crum/bread-crum.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { DockModule } from 'primeng/dock';
 
 
 
@@ -15,9 +16,10 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
   imports: [
     CommonModule,
     ButtonModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    DockModule
   ],
-  exports:[BreadCrumComponent]
+  exports:[BreadCrumComponent, BarraNavegacionComponent]
 })
 export class SharedModule {
   

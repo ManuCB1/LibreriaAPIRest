@@ -7,6 +7,7 @@ import { AutoresComponent } from './autores/autores.component';
 import { TemaComponent } from './tema/tema.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     RouterModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    ComponentsModule
   ],
   exports: []
 })

@@ -12,26 +12,28 @@ export class MainPageComponent implements OnInit{
   nuevoMensaje: string = "";
   contador: number = 0;
 
-
+  
+  
   constructor() { 
-    console.log("Constructor de PagesModule");
+    // console.log("Constructor de PagesModule");
   }
 
   ngOnInit(): void {
-    console.log("ngOnInit de PagesModule");
+    // console.log("ngOnInit de PagesModule");
   }
 
-  incrementarContador(){
-    this.contador++;
-  }
 
-  decrementarContador(){
-    this.contador--;
-  }
+  // incrementarContador(){
+  //   this.contador++;
+  // }
 
-  setString(){
-    this.pista = this.nuevoMensaje;
-  }
+  // decrementarContador(){
+  //   this.contador--;
+  // }
+
+  // setString(){
+  //   this.pista = this.nuevoMensaje;
+  // }
   
 
 

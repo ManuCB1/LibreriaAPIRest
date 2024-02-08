@@ -1,1 +1,41 @@
-<p>libros works!</p>
+
+<div class="libros animate__animated animate__bounce" *ngFor="let libro of libros">
+    <br>
+    <label>Libro</label>
+    <div class="info-item">
+      <label>Id:</label>
+      <span>{{ libro.Id }}</span>
+    </div>
+    <div class="info-item">
+      <label>ISBN:</label>
+      <span>{{ libro.Isbn }}</span>
+    </div>
+    <div class="info-item">
+      <label>Autor:</label>
+      <span>{{ libro.Autor }}</span>
+    </div>
+    <div class="info-item">
+      <label>Edición:</label>
+      <span>{{ libro.Edicion }}</span>
+    </div>
+    <div class="info-item">
+      <label>Formato:</label>
+      <span>{{ libro.Formato }}</span>
+    </div>
+    <div class="info-item">
+      <label>Tema:</label>
+      <span>{{ libro.Tema }}</span>
+    </div>
+    <div class="info-item">
+      <label>Precio:</label>
+      <span>{{ libro.Precio }}  €</span>
+    </div>
+    <div class="info-item">
+      <label>Cantidad:</label>
+      <span>{{ libro.Cantidad }}</span>
+    </div>
+    <div class="info-item">
+      <label>Imagen:</label>
+      <img [src]="libro.Imagen" alt="Imagen del libro" />
+    </div>
+</div>
