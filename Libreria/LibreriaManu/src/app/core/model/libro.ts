@@ -1,6 +1,7 @@
 export interface Libro {
     Id: number;
     Isbn: string;
+    Nombre: string;
     Autor: string;
     Edicion: string;
     Formato: string;
@@ -8,4 +9,4 @@ export interface Libro {
     Precio: number;
     Cantidad: number;
     Imagen: string;
-    }
+}

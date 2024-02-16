@@ -1,8 +1,0 @@
-.content {
-  display: grid;
-  grid-template-columns: 1fr;
-
-  @media (min-width: 768px) {
-    grid-template-columns: 220px 1fr;
-  }
-}

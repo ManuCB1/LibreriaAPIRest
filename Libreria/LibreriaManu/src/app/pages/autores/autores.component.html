@@ -1,1 +1,5 @@
-<!-- <p>autores works!</p> -->
+@for (autor of autores; track autor.Id) {
+    <div class="info">
+        <br>{{autor.Nombre}}<br>
+    </div>
+}

@@ -9,15 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LibrosComponent implements OnInit{
 
-  libros:Libro[] = [];
+  libros:Libro[] | undefined;
+  selectedLibro: Libro | undefined;
 
   constructor(private librosService: LibrosService) { }
 
   ngOnInit(): void {
-    this.librosService.getLibros().subscribe((libros:any) => {
+    this.librosService.getLibros().subscribe((libros : any) => {
       this.libros = libros;
-      // console.log(libros);
+    },
+    (error) => {
+      console.log(error);
     });
+  }
+
+  show(libro: Libro): void{
+    this.selectedLibro = libro;
+  }
+
+  hide(): void{
+    this.selectedLibro = undefined;
   }
 
 }

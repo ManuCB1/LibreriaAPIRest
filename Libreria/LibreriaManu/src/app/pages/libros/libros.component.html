@@ -1,41 +1,31 @@
 
-<div class="libros animate__animated animate__bounce" *ngFor="let libro of libros">
-    <br>
-    <label>Libro</label>
-    <div class="info-item">
-      <label>Id:</label>
-      <span>{{ libro.Id }}</span>
+@for (libro of libros; track libro.Id) {
+  <div class="card-container" (mouseover)="show(libro)" (mouseout)="hide()">
+    <div class="card" [ngClass]="{'flipped': selectedLibro === libro}">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="card-image">
+            <img [src]="libro.Imagen" [alt]="libro.Imagen">
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="card-content">
+            <div class="card-description">
+              <h4>ISBN: {{libro.Isbn}}</h4>
+              <h4>Autor: {{libro.Autor}}</h4>
+              <h4>Edicion: {{libro.Edicion}}</h4>
+              <h4>Precio: {{libro.Precio}}</h4>
+              <h4>Stock: {{libro.Cantidad}}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-title">{{libro.Nombre}}</div>
     </div>
-    <div class="info-item">
-      <label>ISBN:</label>
-      <span>{{ libro.Isbn }}</span>
-    </div>
-    <div class="info-item">
-      <label>Autor:</label>
-      <span>{{ libro.Autor }}</span>
-    </div>
-    <div class="info-item">
-      <label>Edición:</label>
-      <span>{{ libro.Edicion }}</span>
-    </div>
-    <div class="info-item">
-      <label>Formato:</label>
-      <span>{{ libro.Formato }}</span>
-    </div>
-    <div class="info-item">
-      <label>Tema:</label>
-      <span>{{ libro.Tema }}</span>
-    </div>
-    <div class="info-item">
-      <label>Precio:</label>
-      <span>{{ libro.Precio }}  €</span>
-    </div>
-    <div class="info-item">
-      <label>Cantidad:</label>
-      <span>{{ libro.Cantidad }}</span>
-    </div>
-    <div class="info-item">
-      <label>Imagen:</label>
-      <img [src]="libro.Imagen" alt="Imagen del libro" />
-    </div>
+  </div>
+  
+}
+
+<div class="btn-libro">
+  <button pButton label="Nuevo Libro" icon="pi pi-plus" class="p-button-success" [routerLink]="['/main/crear-libro']"></button>
 </div>
