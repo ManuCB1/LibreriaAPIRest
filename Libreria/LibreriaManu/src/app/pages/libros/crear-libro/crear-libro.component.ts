@@ -57,6 +57,7 @@ export class CrearLibroComponent implements OnInit{
       return;
     }
     console.log(this.FormsLibro.value);
+    Swal.fire('Éxito', 'Libro Guardado Correctamente', 'success');
   }
 
 }

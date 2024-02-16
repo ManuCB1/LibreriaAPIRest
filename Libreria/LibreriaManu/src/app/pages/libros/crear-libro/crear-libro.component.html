@@ -7,13 +7,13 @@
     <div class="info-form">
       <label for="isbn">Isbn: </label>
       <input pInputText id="isbn" type="text" formControlName="isbn">
-      <span class="error-message" *ngIf="FormsLibro.get('isbn')?.errors?.['required']">
+      <span class="error-message" *ngIf="FormsLibro.get('isbn')?.touched && FormsLibro.get('isbn')?.errors?.['required']">
         El ISBN no puede estar vacío
       </span>
-      <span class="error-message" *ngIf="FormsLibro.get('isbn')?.errors?.['minlength']">
+      <span class="error-message" *ngIf="FormsLibro.get('isbn')?.touched && FormsLibro.get('isbn')?.errors?.['minlength']">
         El ISBN debe tener al menos 13 caracteres
       </span>
-      <span class="error-message" *ngIf="FormsLibro.get('isbn')?.errors?.['maxlength']">
+      <span class="error-message" *ngIf="FormsLibro.get('isbn')?.touched && FormsLibro.get('isbn')?.errors?.['maxlength']">
         El ISBN no puede tener más de 13 caracteres
       </span>
     </div>
@@ -21,15 +21,15 @@
     <div class="info-form">
       <label for="nombre">Título: </label>
       <input pInputText id="nombre" type="text" formControlName="nombre">
-      <span class="error-message" *ngIf="this.FormsLibro.get('nombre')?.errors?.['required']">
+      <span class="error-message" *ngIf="FormsLibro.get('nombre')?.touched && this.FormsLibro.get('nombre')?.errors?.['required']">
         El Título no puede estar vacío
       </span>
     </div>
 
     <div class="info-form">
       <label for="autor">Autor: </label>
-      <p-dropdown [options]="autores" formControlName="autor" placeholder="Seleccione un Autor" optionLabel="Nombre"></p-dropdown>
-      <span class="error-message" *ngIf="this.FormsLibro.get('autor')?.errors?.['required']">
+      <p-dropdown [options]="autores" formControlName="autor" optionLabel="Nombre" [filter]="true" filterBy="Nombre" placeholder="Seleccione un Autor"></p-dropdown>
+      <span class="error-message" *ngIf="FormsLibro.get('autor')?.touched && this.FormsLibro.get('autor')?.errors?.['required']">
         El Autor no puede estar vacío
       </span>
     </div>
@@ -37,7 +37,7 @@
     <div class="info-form">
       <label for="edicion">Edición: </label>
       <p-dropdown [options]="autores" formControlName="edicion" placeholder="Seleccione una Edición" optionLabel="Nombre"></p-dropdown>
-      <span class="error-message" *ngIf="this.FormsLibro.get('edicion')?.errors?.['required']">
+      <span class="error-message" *ngIf="FormsLibro.get('edicion')?.touched && this.FormsLibro.get('edicion')?.errors?.['required']">
         La Edición no puede estar vacío
       </span>
     </div>
@@ -45,7 +45,7 @@
     <div class="info-form">
       <label for="formato">Formato: </label>
       <p-dropdown [options]="autores" formControlName="formato" placeholder="Seleccione un Formato" optionLabel="Nombre"></p-dropdown>
-      <span class="error-message" *ngIf="this.FormsLibro.get('formato')?.errors?.['required']">
+      <span class="error-message" *ngIf="FormsLibro.get('formato')?.touched && this.FormsLibro.get('formato')?.errors?.['required']">
         El Formato no puede estar vacío
       </span>
     </div>
@@ -53,23 +53,25 @@
     <div class="info-form">
       <label for="tema">Tema: </label>
       <p-dropdown [options]="temas" formControlName="tema" placeholder="Seleccione un Tema" optionLabel="Nombre"></p-dropdown>
-      <span class="error-message" *ngIf="this.FormsLibro.get('tema')?.errors?.['required']">
+      <span class="error-message" *ngIf="FormsLibro.get('tema')?.touched && this.FormsLibro.get('tema')?.errors?.['required']">
         El Tema no puede estar vacío
       </span>
     </div>
 
     <div class="info-form">
       <label for="precio">Precio: </label>
-      <p-inputNumber inputId="locale-us" id="precio" mode="decimal" locale="en-US" [maxFractionDigits]="2" formControlName="precio"></p-inputNumber> 
-      <span class="error-message" *ngIf="this.FormsLibro.get('precio')?.errors?.['min']">
+      <p-inputNumber id="precio" [maxFractionDigits]="2" formControlName="precio" mode="currency" currency="EUR"></p-inputNumber> 
+      <span class="error-message" *ngIf="FormsLibro.get('precio')?.touched && this.FormsLibro.get('precio')?.errors?.['min']">
         El precio debe ser mayor a 0
       </span>
     </div>
 
     <div class="info-form">
       <label for="cantidad">Cantidad: </label>
-      <input pInputText id="cantidad" type="number" formControlName="cantidad">
-      <span class="error-message" *ngIf="this.FormsLibro.get('cantidad')?.errors?.['min']">
+      <!-- <input pInputText id="cantidad" type="number" formControlName="cantidad"> -->
+      <p-inputNumber id="cantidad" formControlName="cantidad" mode="decimal" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="100"> </p-inputNumber>
+
+      <span class="error-message" *ngIf="FormsLibro.get('cantidad')?.touched && this.FormsLibro.get('cantidad')?.errors?.['min']">
         La cantidad no es correcta
       </span>
     </div>
@@ -77,11 +79,12 @@
     <div class="info-form">
       <label for="imagen">URL Imagen: </label>
       <input pInputText id="imagen" type="text" formControlName="imagen">
-      <span class="error-message" *ngIf="this.FormsLibro.get('imagen')?.errors?.['required']">
+      <span class="error-message" *ngIf="FormsLibro.get('imagen')?.touched && this.FormsLibro.get('imagen')?.errors?.['required']">
         La imagen no puede estar vacía
       </span>
     </div>
+    
+    <button type="submit" [disabled]="FormsLibro.invalid">Guardar Libro</button>
   </div>
   
-  <button type="submit" [disabled]="FormsLibro.invalid">Guardar Libro</button>
 </form>

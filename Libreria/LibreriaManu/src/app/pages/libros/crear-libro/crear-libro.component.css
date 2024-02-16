@@ -6,7 +6,8 @@
 }
 
 .info-container {
-  align-items: center;
+  display: flex;
+  flex-direction: column;
   margin: auto;
 }
 
@@ -39,8 +40,30 @@ label {
 }
 
 input {
+  width: 250px;
   height: 30px;
   padding: 5px;
+}
+
+:host ::ng-deep .p-dropdown {
+  width: 250px;
+  height: 35px;
+  align-items: center;
+}
+:host ::ng-deep .p-inputnumber .p-inputtext {
+  width: 250px;
+  height: 35px;
+}
+
+:host ::ng-deep .p-inputnumber-button-group {
+  height: 35px;
+}
+
+:host ::ng-deep .p-inputnumber-button-up {
+  background-color: #18b21d;
+}
+:host ::ng-deep .p-inputnumber-button-down {
+  background-color: #FF0000;
 }
 
 button[type="submit"] {
@@ -50,6 +73,8 @@ button[type="submit"] {
   border: none;
   border-radius: 3px;
   cursor: pointer;
+  margin: auto;
+
 }
 
 button[type="submit"]:disabled {
