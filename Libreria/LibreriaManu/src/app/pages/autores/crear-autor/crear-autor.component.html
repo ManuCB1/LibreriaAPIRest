@@ -1,0 +1,13 @@
+<form [formGroup]="FormsAutor" class="my-form" (ngSubmit)="submit$.next()">
+    <div class="info-form">
+        <label aria-required="true" for="nombre">Nombre </label>
+        <input pInputText id="nombre" type="text" formControlName="nombre">
+        <span class="error-message"
+            *ngIf="FormsAutor.get('nombre')?.touched && this.FormsAutor.get('nombre')?.errors?.['required']">
+            El Nombre no puede estar vacío
+        </span>
+    </div>
+    <div class="info-buttons">
+        <button type="submit">Confirmar</button>
+    </div>
+</form>

@@ -14,4 +14,9 @@ export class LibrosService {
   getLibros() {
     return this.httpClient.get(`${environment.BASE_API_URL}libro/libro-controller`);
   }
+
+  postLibro(libro: any) {
+    return this.httpClient.post(`${environment.BASE_API_URL}libro/libro-controller`, libro);
+  }
+
 }

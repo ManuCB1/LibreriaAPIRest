@@ -11,15 +11,15 @@ export class TemaComponent {
 
   temas: Tema[] = [];
 
-  constructor(private temasService: TemasService) {}
+  constructor(private temasService: TemasService) { }
 
   ngOnInit(): void {
-    this.temasService.getTemas().subscribe((temas : any) => {
+    this.temasService.getTemas().subscribe((temas: any) => {
       this.temas = temas;
     },
-    (error) => {
-      console.log(error);
-    });
+      (error) => {
+        console.log(error);
+      });
   }
 
 }

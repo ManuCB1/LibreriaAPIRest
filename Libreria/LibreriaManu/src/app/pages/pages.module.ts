@@ -1,3 +1,4 @@
+import { ToastModule } from 'primeng/toast';
 import { RouterModule } from '@angular/router';
 import { LibrosComponent } from './libros/libros.component';
 import { MainPageComponent } from './main-page.component';
@@ -14,6 +15,14 @@ import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { AutoDestroyService } from '../services/utils/auto-destroy.service';
+import { MessageService } from 'primeng/api';
+import { DialogModule } from 'primeng/dialog';
+import { CrearAutorComponent } from './autores/crear-autor/crear-autor.component';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @NgModule({
   declarations: [
@@ -21,7 +30,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     LibrosComponent,
     AutoresComponent,
     TemaComponent,
-    CrearLibroComponent
+    CrearLibroComponent,
+    CrearAutorComponent
   ],
   imports: [
     CommonModule,
@@ -34,11 +44,17 @@ import { InputNumberModule } from 'primeng/inputnumber';
     DropdownModule,
     BrowserAnimationsModule,
     InputTextModule,
-    InputNumberModule
+    InputNumberModule,
+    ToastModule,
+    DialogModule,
+    NzModalModule,
+    NzIconModule,
+    NzButtonModule
   ],
+  providers: [AutoDestroyService, MessageService, DialogService, DynamicDialogRef, NzModalService],
   exports: []
 })
-export class PagesModule { 
-  
+export class PagesModule {
+
 
 }

@@ -34,7 +34,9 @@ nav a.active {
 }
 .container{
     width: 100%;
-    min-height: 66vh;
+    height: 66vh;
+    margin-top: 15px;
     background-color: rgba(240, 248, 255, 0.221);
-    border-radius: 20px;
+    border-radius: 18px;
+    overflow: auto;
 }

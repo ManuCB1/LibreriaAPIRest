@@ -89,3 +89,7 @@ button[type="submit"]:disabled {
   margin: 7px 0 0 5px;
 }
 
+.messages {
+  position: absolute;
+  right: 3%;
+}

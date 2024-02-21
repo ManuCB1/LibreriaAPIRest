@@ -1,28 +1,42 @@
+import { LibrosService } from './../../../services/libros.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AutoresService } from '../../../services/autores.service';
 import { TemasService } from '../../../services/temas.service';
 import { Autor } from '../../../core/model/autor';
 import { Tema } from '../../../core/model/tema';
-import Swal from 'sweetalert2';
+import { Formato } from '../../../core/model/formato';
+import { Edicion } from '../../../core/model/edicion';
+import { EdicionesService } from '../../../services/ediciones.service';
+import { FormatosService } from '../../../services/formatos.service';
+import { exhaustMap, filter, takeUntil } from 'rxjs';
+import { AutoDestroyService } from '../../../services/utils/auto-destroy.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-crear-libro',
   templateUrl: './crear-libro.component.html',
   styleUrl: './crear-libro.component.css'
 })
-export class CrearLibroComponent implements OnInit{
+export class CrearLibroComponent implements OnInit {
 
   FormsLibro: FormGroup;
   autores: Autor[] = [];
   temas: Tema[] = [];
+  edicion: Edicion[] = [];
+  formato: Formato[] = [];
 
-  constructor(private fb: FormBuilder, private autoresService: AutoresService, private temasService: TemasService) {
+  constructor(
+    private fb: FormBuilder,
+    private readonly autoresService: AutoresService,
+    private readonly temasService: TemasService,
+    private readonly edicionService: EdicionesService,
+    private readonly formatoService: FormatosService,
+    private readonly librosService: LibrosService,
+    private readonly destroy$: AutoDestroyService,
+    private messageService: MessageService) {
     this.FormsLibro = this.fb.group({});
-    this.autores = [
-      // TODO: Agregar autores
-    ];
-   }
+  }
 
   ngOnInit(): void {
     this.FormsLibro = this.fb.group({
@@ -44,21 +58,67 @@ export class CrearLibroComponent implements OnInit{
       this.autores = autores;
       this.temasService.getTemas().subscribe((temas: any) => {
         this.temas = temas;
-    
+        this.edicionService.getEdiciones().subscribe((ediciones: any) => {
+          this.edicion = ediciones;
+          this.formatoService.getFormatos().subscribe((formatos: any) => {
+            this.formato = formatos;
+          });
+        });
+      });
     });
-  });
+  }
+
+  onSubmit() {
+    if (this.FormsLibro.invalid) {
+      this.markFormGroupTouched(this.FormsLibro);
+      // Swal.fire('Error', 'Faltan campos por llenar', 'error');
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Complete los campos requeridos' });
+      console.log('Faltan campos por llenar');
+      return;
+    }
+    this.guardarLibro();
+  }
+
+  markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach(control => {
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      } else {
+        control.markAsTouched();
+      }
+    });
   }
 
   guardarLibro() {
-    if (this.FormsLibro.invalid) {
-      // Mostrar mensaje de error
-      // No se muestra porque el botón de guardar no está habilitado si el formulario es inválido
-      Swal.fire('Error', 'Faltan campos por llenar', 'error');
-      return;
+    const { isbn, nombre, autor, edicion, formato, tema, precio, cantidad, imagen } = this.FormsLibro.value;
+    let libro: any = {
+      Isbn: isbn,
+      Nombre: nombre,
+      Autor: autor.Id,
+      Edicion: edicion.Id,
+      Formato: formato.Id,
+      Tema: tema.Id,
+      Precio: precio,
+      Cantidad: cantidad,
+      Imagen: imagen
     }
-    console.log(this.FormsLibro.value);
-    Swal.fire('Éxito', 'Libro Guardado Correctamente', 'success');
+    this.librosService.postLibro(libro)
+      .pipe(
+        filter(() => this.FormsLibro.valid),
+        // exhaustMap(() => this.librosService.getLibros()),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((libro: any) => {
+        console.log(libro);
+      }, (error) => {
+        console.log(error);
+        // Swal.fire('Error', 'Error al guardar Libro: '+ error, 'error');
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al guardar Libro: ' + error });
+      });
+
+    // Swal.fire('Éxito', 'Libro Guardado Correctamente', 'success');
+    this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Libro Guardado Correctamente' });
+    this.FormsLibro.reset();
   }
 
 }
-
