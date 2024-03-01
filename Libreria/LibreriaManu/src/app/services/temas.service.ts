@@ -13,4 +13,16 @@ export class TemasService {
     return this.httpClient.get(`${environment.BASE_API_URL}tema/temas-controller`);
   }
 
+  postTema(tema: any) {
+    return this.httpClient.post(`${environment.BASE_API_URL}tema/temas-controller`, tema);
+  }
+
+  putTema(tema: any) {
+    return this.httpClient.put(`${environment.BASE_API_URL}tema/temas-controller`, tema);
+  }
+
+  deleteTema(id: number) {
+    return this.httpClient.delete(`${environment.BASE_API_URL}tema/temas-controller`, { body: { id: id } });
+  }
+
 }

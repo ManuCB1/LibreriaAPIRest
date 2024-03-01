@@ -1,31 +1,48 @@
+<app-barra-cierre></app-barra-cierre>
 
-@for (libro of libros; track libro.Id) {
-  <div class="card-container" (mouseover)="show(libro)" (mouseout)="hide()">
-    <div class="card" [ngClass]="{'flipped': selectedLibro === libro}">
-      <div class="card-inner">
-        <div class="card-front">
-          <div class="card-image">
-            <img [src]="libro.Imagen" [alt]="libro.Imagen">
-          </div>
+<nz-input-group [nzSuffix]="suffixIconSearch">
+  <input type="text" nz-input placeholder="Buscar por ISBN" [formControl]="libroBuscado" maxlength="13"/>
+</nz-input-group>
+<ng-template #suffixIconSearch>
+  <span nz-icon nzType="search"></span>
+</ng-template>
+
+<p-toast position="top-center"></p-toast>
+
+@for (libro of librosMostrados; track libro.Isbn) {
+<div class="card-container" (mouseover)="show(libro)" (mouseout)="hide()">
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-front">
+        <div class="card-image">
+          <img [src]="libro.Imagen" [alt]="libro.Nombre">
         </div>
-        <div class="card-back">
-          <div class="card-content">
-            <div class="card-description">
-              <h4>ISBN: {{libro.Isbn}}</h4>
-              <h4>Autor: {{libro.Autor}}</h4>
-              <h4>Edicion: {{libro.Edicion}}</h4>
-              <h4>Precio: {{libro.Precio}}</h4>
-              <h4>Stock: {{libro.Cantidad}}</h4>
-            </div>
+      </div>
+      <div class="card-back">
+        <div class="card-content">
+          <div class="card-description">
+            <h4>ISBN: {{libro.Isbn}}</h4>
+            <h4>Autor: {{libro.Autor}}</h4>
+            <h4>Edicion: {{libro.Edicion}}</h4>
+            <h4>Formato: {{libro.Formato}}</h4>
+            <h4>Tema: {{libro.Tema}}</h4>
+            <h4>Precio: {{libro.Precio | currency:'EUR'}}</h4>
+            <h4>Stock: {{libro.Cantidad}}</h4>
+            <br>
+            <p-button label="Editar" icon="pi pi-user-edit" size="small" (onClick)="updateLibro(libro)" class="miButton"></p-button>
+            <br><br>
+            <p-button label="Eliminar" icon="pi pi-trash" severity="danger" size="small"
+              (onClick)="deleteLibro(libro.Isbn)"></p-button>
           </div>
         </div>
       </div>
-      <div class="card-title">{{libro.Nombre}}</div>
     </div>
+    <div class="card-title">{{libro.Nombre}}</div>
   </div>
-  
+</div>
 }
 
 <div class="btn-libro">
-  <button pButton label="Nuevo Libro" icon="pi pi-plus" class="p-button-success" [routerLink]="['/main/crear-libro']"></button>
+  <button pButton label="Nuevo Libro" icon="pi pi-plus" class="p-button-success"
+    [routerLink]="['/main/crear-libro']"></button>
 </div>

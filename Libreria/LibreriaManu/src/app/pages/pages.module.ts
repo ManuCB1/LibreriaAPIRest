@@ -23,6 +23,17 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { EditarAutorComponent } from './autores/editar-autor/editar-autor.component';
+import { CrearTemaComponent } from './tema/crear-tema/crear-tema.component';
+import { EditarTemaComponent } from './tema/editar-tema/editar-tema.component';
+import { EditarLibroComponent } from './libros/editar-libro/editar-libro.component';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { EdicionComponent } from './edicion/edicion.component';
+import { FormatoComponent } from './formato/formato.component';
+import { CrearEdicionComponent } from './edicion/crear-edicion/crear-edicion.component';
+import { EditarEdicionComponent } from './edicion/editar-edicion/editar-edicion.component';
+import { CrearFormatoComponent } from './formato/crear-formato/crear-formato.component';
+import { EditarFormatoComponent } from './formato/editar-formato/editar-formato.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +42,17 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     AutoresComponent,
     TemaComponent,
     CrearLibroComponent,
-    CrearAutorComponent
+    CrearAutorComponent,
+    EditarAutorComponent,
+    CrearTemaComponent,
+    EditarTemaComponent,
+    EditarLibroComponent,
+    EdicionComponent,
+    FormatoComponent,
+    CrearEdicionComponent,
+    EditarEdicionComponent,
+    CrearFormatoComponent,
+    EditarFormatoComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +70,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     DialogModule,
     NzModalModule,
     NzIconModule,
-    NzButtonModule
+    NzButtonModule,
+    NzInputModule
   ],
   providers: [AutoDestroyService, MessageService, DialogService, DynamicDialogRef, NzModalService],
   exports: []

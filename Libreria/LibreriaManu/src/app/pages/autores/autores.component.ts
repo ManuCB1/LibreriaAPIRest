@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CrearAutorComponent } from './crear-autor/crear-autor.component';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { EditarAutorComponent } from './editar-autor/editar-autor.component';
 
 @Component({
   selector: 'app-autores',
@@ -29,11 +30,25 @@ export class AutoresComponent implements OnInit {
     this.getData();
   }
 
-  openDialog(): void {
+  newDialog(): void {
     this.dialogRef = this.dialogService.open(CrearAutorComponent, {
       header: 'Nuevo Autor',
       width: '30%',
       contentStyle: { 'height': '150px' }
+    });
+    this.dialogRef.onClose.subscribe((response: any) => {
+      if (response) {
+        this.getData();
+      }
+    });
+  }
+
+  updateDialog(id: number): void {
+    this.dialogRef = this.dialogService.open(EditarAutorComponent, {
+      header: 'Editar Autor',
+      width: '30%',
+      contentStyle: { 'height': '150px' },
+      data: { idAutor: id }
     });
     this.dialogRef.onClose.subscribe((response: any) => {
       if (response) {
@@ -54,12 +69,19 @@ export class AutoresComponent implements OnInit {
     this.modalService.confirm({
       nzTitle: '¿Está seguro/a de eliminar el autor?',
       nzContent: 'El autor será eliminado',
+      nzOkText: 'Sí',
+      nzOkDanger: true,
+      nzCancelText: 'No',
       nzOnOk: () => {
         this.autoresService.deleteAutor(id)
           .pipe(takeUntil(this.destroy$))
           .subscribe((response: any) => {
-            this.getData();
-            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Autor Eliminado Correctamente' });
+            if (response.Error == null){
+              this.getData();
+              this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Autor Eliminado Correctamente' });
+            }else{
+              this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se puede eliminar el autor porque está en algún Libro' });
+            }
           });
       }
     });

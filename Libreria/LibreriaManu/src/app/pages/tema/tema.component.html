@@ -1,10 +1,11 @@
-<p-button class="btn-New" label="Nuevo Tema" icon="pi pi-plus" size="small" severity="success"></p-button>
+<app-barra-cierre></app-barra-cierre>
+<p-button class="btn-New" label="Nuevo Tema" icon="pi pi-plus" size="small" severity="success" (onClick)="newDialog()"></p-button>
 @for (tema of temas; track tema.Id) {
     <div class="info">
         {{tema.Nombre}}
         <div class="info-buttons">
-            <p-button label="Editar" icon="pi pi-user-edit" size="small"></p-button>
-            <p-button label="Eliminar" icon="pi pi-trash" severity="danger" size="small"></p-button>
+            <p-button label="Editar" icon="pi pi-user-edit" size="small" (onClick)="updateDialog(tema.Id)"></p-button>
+            <p-button label="Eliminar" icon="pi pi-trash" severity="danger" size="small" (onClick)="deleteTema(tema.Id)"></p-button>
         </div>
     </div>
 }

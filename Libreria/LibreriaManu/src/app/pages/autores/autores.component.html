@@ -1,10 +1,11 @@
-<p-button class="btn-New" label="Nuevo Autor" icon="pi pi-plus" size="small" severity="success" (onClick)="openDialog()"></p-button>
+<app-barra-cierre></app-barra-cierre>
+<p-button class="btn-New" label="Nuevo Autor" icon="pi pi-plus" size="small" severity="success" (onClick)="newDialog()"></p-button>
 <p-toast position="top-center"></p-toast>
 @for (autor of autores; track autor.Id) {
     <div class="info">
         {{autor.Nombre}}
         <div class="info-buttons">
-            <p-button label="Editar" icon="pi pi-user-edit" size="small"></p-button>
+            <p-button label="Editar" icon="pi pi-user-edit" size="small" (onClick)="updateDialog(autor.Id)"></p-button>
             <p-button label="Eliminar" icon="pi pi-trash" severity="danger" size="small" (onClick)="deleteAutor(autor.Id)"></p-button>
         </div>
     </div>

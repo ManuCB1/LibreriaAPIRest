@@ -17,12 +17,11 @@ export class AutoresService {
     return this.httpClient.post(`${environment.BASE_API_URL}autor/autor-controller`, autor);
   }
 
-  // putAutor(autor: any) {
-  //   return this.httpClient.put(`${environment.BASE_API_URL}autor/autor-controller`, autor);
-  // }
+  putAutor(autor: any) {
+    return this.httpClient.put(`${environment.BASE_API_URL}autor/autor-controller`, autor);
+  }
 
   deleteAutor(id: number) {
-    console.log(id);
     return this.httpClient.delete(`${environment.BASE_API_URL}autor/autor-controller`, { body: { id: id } });
   }
 

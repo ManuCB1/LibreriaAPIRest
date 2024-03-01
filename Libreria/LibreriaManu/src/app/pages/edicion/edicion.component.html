@@ -1,0 +1,12 @@
+<app-barra-cierre></app-barra-cierre>
+<p-button class="btn-New" label="Nueva Edición" icon="pi pi-plus" size="small" severity="success" (onClick)="newDialog()"></p-button>
+<p-toast position="top-center"></p-toast>
+@for (edicion of ediciones; track edicion.Id) {
+    <div class="info">
+        {{edicion.Nombre}}
+        <div class="info-buttons">
+            <p-button label="Editar" icon="pi pi-user-edit" size="small" (onClick)="updateDialog(edicion.Id)"></p-button>
+            <p-button label="Eliminar" icon="pi pi-trash" severity="danger" size="small" (onClick)="deleteEdicion(edicion.Id)"></p-button>
+        </div>
+    </div>
+}

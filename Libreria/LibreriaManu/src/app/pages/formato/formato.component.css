@@ -1,0 +1,28 @@
+.info {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding: 10px;
+    margin: 10px;
+    background-color: rgba(240, 248, 255, 0.221);
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.info:hover {
+    background-color: rgba(240, 248, 255, 0.7);
+}
+
+.info-buttons {
+    display: flex;
+    margin-left: auto;
+    padding: 5px 10px;
+    gap: 10px;
+}
+
+.btn-New {
+    display: flex;
+    margin: 10px;
+}

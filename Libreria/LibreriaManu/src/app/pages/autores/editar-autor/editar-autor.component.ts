@@ -1,25 +1,27 @@
+import { ButtonModule } from 'primeng/button';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { AutoresService } from '../../../services/autores.service';
+import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subject, exhaustMap, filter, takeUntil, tap } from 'rxjs';
 import { AutoDestroyService } from '../../../services/utils/auto-destroy.service';
-import { Subject, exhaustMap, filter, mergeMap, of, takeUntil, tap } from 'rxjs';
+import { AutoresService } from '../../../services/autores.service';
 import { MessageService } from 'primeng/api';
+import { subscribe } from 'diagnostics_channel';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
-  selector: 'app-crear-autor',
-  templateUrl: './crear-autor.component.html',
-  styleUrl: './crear-autor.component.css'
+  selector: 'app-editar-autor',
+  templateUrl: './editar-autor.component.html',
+  styleUrl: './editar-autor.component.css'
 })
-export class CrearAutorComponent implements OnInit {
+export class EditarAutorComponent implements OnInit {
 
   FormsAutor: FormGroup;
   submit$: Subject<void> = new Subject<void>();
 
-  constructor(
-    private readonly destroy$: AutoDestroyService,
-    private fb: FormBuilder,
+  constructor(private fb: FormBuilder,
     private readonly autoresService: AutoresService,
+    private readonly destroy$: AutoDestroyService,
+    private dialogConfig: DynamicDialogConfig,
     private readonly messageService: MessageService,
     private readonly dialogRef: DynamicDialogRef) {
     this.FormsAutor = this.fb.group({
@@ -41,7 +43,10 @@ export class CrearAutorComponent implements OnInit {
           }
         }),
         filter(() => this.FormsAutor.valid),
-        exhaustMap(() => this.autoresService.postAutor(this.FormsAutor.value)),
+        exhaustMap(() => this.autoresService.putAutor({
+          id: this.dialogConfig.data.idAutor,
+          nombre: this.FormsAutor.value.nombre
+        })),
         takeUntil(this.destroy$)
       )
       .subscribe(
@@ -49,6 +54,16 @@ export class CrearAutorComponent implements OnInit {
           this.dialogRef.close(response);
           this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Autor Guardado Correctamente' });
         });
+  }
+
+  markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach(control => {
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      } else {
+        control.markAsTouched();
+      }
+    });
   }
 
 }

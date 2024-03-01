@@ -16,6 +16,8 @@ export class BarraNavegacionComponent implements OnInit{
       {label: 'Libros', icon: 'assets/icons/libro.png', routerLink:"/main/libro"},
       {label: 'Autores', icon: 'assets/icons/autor.png', routerLink:"/main/autor"},
       {label: 'Temas', icon: 'assets/icons/tema.png', routerLink:"/main/tema"},
+      {label: 'Edición', icon: 'assets/icons/edicion.png', routerLink:"/main/edicion"},
+      {label: 'Formato', icon: 'assets/icons/formato.png', routerLink:"/main/formato"},
     ];
       
   }

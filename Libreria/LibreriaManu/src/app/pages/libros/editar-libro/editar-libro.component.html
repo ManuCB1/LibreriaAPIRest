@@ -1,0 +1,69 @@
+<form [formGroup]="FormsLibro" class="my-form" (submit)="submit$.next()">
+    <div class="imagen-form">
+      <img *ngIf="FormsLibro.get('imagen')?.value" [src]="FormsLibro.get('imagen')?.value" alt="Imagen Previa Libro">
+    </div>
+  
+    <p-toast position="top-center"></p-toast>
+    
+    <div class="info-container">
+      <div class="info-form">
+        <label for="nombre">Título: </label>
+        <input pInputText id="nombre" type="text" formControlName="nombre" [value]="this.libroSeleccionado.Nombre">
+        <span class="error-message" *ngIf="FormsLibro.get('nombre')?.touched && this.FormsLibro.get('nombre')?.errors?.['required']">
+          El Título no puede estar vacío
+        </span>
+      </div>
+  
+      <div class="info-form">
+        <label for="autor">Autor: </label>
+        <p-dropdown [options]="autores" formControlName="autor" optionLabel="Nombre" [filter]="true" filterBy="Nombre"></p-dropdown>
+        <span class="error-message" *ngIf="FormsLibro.get('autor')?.touched && this.FormsLibro.get('autor')?.errors?.['required']">
+          El Autor no puede estar vacío
+        </span>
+      </div>
+    
+      <div class="info-form">
+        <label for="edicion">Edición: </label>
+        <p-dropdown [options]="edicion" formControlName="edicion" optionLabel="Nombre" [filter]="true" filterBy="Nombre"></p-dropdown>
+        <span class="error-message" *ngIf="FormsLibro.get('edicion')?.touched && this.FormsLibro.get('edicion')?.errors?.['required']">
+          La Edición no puede estar vacío
+        </span>
+      </div>
+  
+      <div class="info-form">
+        <label for="formato">Formato: </label>
+        <p-dropdown [options]="formato" formControlName="formato" optionLabel="Nombre" [filter]="true" filterBy="Nombre"></p-dropdown>
+        <span class="error-message" *ngIf="FormsLibro.get('formato')?.touched && this.FormsLibro.get('formato')?.errors?.['required']">
+          El Formato no puede estar vacío
+        </span>
+      </div>
+  
+      <div class="info-form">
+        <label for="tema">Tema: </label>
+        <p-dropdown [options]="temas" formControlName="tema" optionLabel="Nombre" [filter]="true" filterBy="Nombre"></p-dropdown>
+        <span class="error-message" *ngIf="FormsLibro.get('tema')?.touched && this.FormsLibro.get('tema')?.errors?.['required']">
+          El Tema no puede estar vacío
+        </span>
+      </div>
+  
+      <div class="info-form">
+        <label for="precio">Precio: </label>
+        <p-inputNumber id="precio" [maxFractionDigits]="2" formControlName="precio" mode="currency" currency="EUR" [ariaValueText]="this.libroSeleccionado.Precio"></p-inputNumber> 
+        <span class="error-message" *ngIf="FormsLibro.get('precio')?.touched && this.FormsLibro.get('precio')?.errors?.['min']">
+          El precio debe ser mayor a 0
+        </span>
+      </div>
+  
+      <div class="info-form">
+        <label for="imagen">URL Imagen: </label>
+        <input pInputText id="imagen" type="text" formControlName="imagen" [value]="this.libroSeleccionado.Imagen">
+        <span class="error-message" *ngIf="FormsLibro.get('imagen')?.touched && this.FormsLibro.get('imagen')?.errors?.['required']">
+          La imagen no puede estar vacía
+        </span>
+      </div>
+      
+      <button type="submit">Guardar Libro</button>
+    </div>
+    
+  </form>
+  

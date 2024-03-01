@@ -70,23 +70,13 @@ export class CrearLibroComponent implements OnInit {
 
   onSubmit() {
     if (this.FormsLibro.invalid) {
-      this.markFormGroupTouched(this.FormsLibro);
+      this.FormsLibro.markAllAsTouched();
       // Swal.fire('Error', 'Faltan campos por llenar', 'error');
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Complete los campos requeridos' });
-      console.log('Faltan campos por llenar');
+      // console.log('Faltan campos por llenar');
       return;
     }
     this.guardarLibro();
-  }
-
-  markFormGroupTouched(formGroup: FormGroup) {
-    Object.values(formGroup.controls).forEach(control => {
-      if (control instanceof FormGroup) {
-        this.markFormGroupTouched(control);
-      } else {
-        control.markAsTouched();
-      }
-    });
   }
 
   guardarLibro() {
