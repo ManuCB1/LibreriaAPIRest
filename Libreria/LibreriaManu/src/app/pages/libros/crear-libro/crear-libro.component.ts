@@ -87,7 +87,7 @@ export class CrearLibroComponent implements OnInit {
           this.FormsLibro.reset();
         } else {
           console.log('Error al guardar el libro', response);
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al guardar el libro' });
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al guardar el libro, Isbn Existente' });
         }
       });
   }

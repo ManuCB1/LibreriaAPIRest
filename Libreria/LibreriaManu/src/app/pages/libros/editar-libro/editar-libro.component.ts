@@ -141,7 +141,7 @@ export class EditarLibroComponent implements OnInit {
         (response: any) => {
           console.log('Libro Editado: ', this.FormsLibro.value);
           this.dialogRef.close(response);
-          this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Tema Guardado Correctamente' });
+          this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Libro Editado Correctamente' });
         });
   }
 
