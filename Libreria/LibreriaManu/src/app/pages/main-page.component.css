@@ -27,8 +27,8 @@ nav a.active {
     height: 100%;
     position: relative;
     padding: 20px;
-    /* background: url("https://www.revistapresencia.net/wp-content/uploads/2020/11/FONDO-PAGINA-WEB-2.png"); */
-    background: url("https://www.solofondos.com/wp-content/uploads/2015/11/Imagen-de-fondo-html.jpg");
+    /* background: url("https://www.solofondos.com/wp-content/uploads/2015/11/Imagen-de-fondo-html.jpg"); */
+    background-image: url('/assets/icons/fondo.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;

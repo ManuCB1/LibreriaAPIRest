@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { AutoresService } from '../../services/autores.service';
 import { Autor } from '../../core/model/autor';
 import { AutoDestroyService } from '../../services/utils/auto-destroy.service';
-import { takeUntil } from 'rxjs';
+import { catchError, takeUntil } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CrearAutorComponent } from './crear-autor/crear-autor.component';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { EditarAutorComponent } from './editar-autor/editar-autor.component';
+import { error } from 'node:console';
 
 @Component({
   selector: 'app-autores',
@@ -74,7 +75,12 @@ export class AutoresComponent implements OnInit {
       nzCancelText: 'No',
       nzOnOk: () => {
         this.autoresService.deleteAutor(id)
-          .pipe(takeUntil(this.destroy$))
+          .pipe(
+            // catchError((error) => {
+            //   this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se puede eliminar el autor porque está en algún Libro' });
+            //   return error;
+            // }),
+            takeUntil(this.destroy$))
           .subscribe((response: any) => {
             if (response.Error == null){
               this.getData();
@@ -82,7 +88,11 @@ export class AutoresComponent implements OnInit {
             }else{
               this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se puede eliminar el autor porque está en algún Libro' });
             }
-          });
+          }
+          // (error: any) => {
+          //   this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se puede eliminar el autor porque está en algún Libro' });
+          // }
+          );
       }
     });
   }

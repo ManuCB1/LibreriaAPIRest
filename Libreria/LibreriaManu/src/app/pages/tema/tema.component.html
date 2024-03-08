@@ -1,5 +1,6 @@
 <app-barra-cierre></app-barra-cierre>
 <p-button class="btn-New" label="Nuevo Tema" icon="pi pi-plus" size="small" severity="success" (onClick)="newDialog()"></p-button>
+<p-toast position="top-center"></p-toast>
 @for (tema of temas; track tema.Id) {
     <div class="info">
         {{tema.Nombre}}
