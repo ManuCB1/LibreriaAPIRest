@@ -19,7 +19,6 @@ import { EditarLibroComponent } from './editar-libro/editar-libro.component';
 export class LibrosComponent implements OnInit {
 
   librosReales: Libro[] | undefined;
-  selectedLibro: Libro | undefined;
   libroBuscado = new FormControl();
   librosTemp: Libro[] | undefined;
   librosMostrados: Libro[] | undefined;
@@ -49,7 +48,6 @@ export class LibrosComponent implements OnInit {
   subscribeToSearch() {
     this.libroBuscado.valueChanges
       .pipe(
-        // filter((texto: string) => texto.length === 13 || texto.length < 13),
         debounceTime(500),
         distinctUntilChanged(),
         switchMap(async (isbn) => {
@@ -76,14 +74,6 @@ export class LibrosComponent implements OnInit {
     }
     this.librosMostrados = libroEncontrado;
 
-  }
-
-  show(libro: Libro): void {
-    this.selectedLibro = libro;
-  }
-
-  hide(): void {
-    this.selectedLibro = undefined;
   }
 
   updateLibro(libro: any): void {
